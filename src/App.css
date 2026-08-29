@@ -12,10 +12,18 @@
         animation: App-logo-spin infinite 20s linear;
     }
 }
-
+.Rectangles {
+    width: 1920px;
+    height: 1080px;
+    background-color: rgb(147, 255, 6);
+}
+.big-image {
+    width: 720px;
+    height: 360px;
+}
 .App-header {
     width: 100%;
-    background-color: #282c34;
+    background-color: rgb(190, 163, 7);
     min-height: 40vh;
     display: flex;
     flex-direction: column;
