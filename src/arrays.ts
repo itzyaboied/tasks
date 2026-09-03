@@ -5,7 +5,12 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    if (!numbers.length) {
+        return [];
+    } else if (numbers.length === 1) {
+        return [numbers[0], numbers[0]];
+    }
+    return [numbers[0], numbers[numbers.length - 1]];
 }
 
 /**
@@ -13,7 +18,11 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    let tripple: number[] = numbers.map(
+        (numbers: number): number => numbers * 3,
+    );
+
+    return tripple;
 }
 
 /**
@@ -21,7 +30,10 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    let numbered: number[] = numbers.map(
+        (numbers: string): number => +numbers || 0,
+    );
+    return numbered;
 }
 
 /**
@@ -32,7 +44,10 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    let numbered: number[] = amounts.map((amounts: string): number =>
+        amounts[0] === "$" ? +amounts.slice(1) || 0 : +amounts || 0,
+    );
+    return numbered;
 };
 
 /**
@@ -41,7 +56,13 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    let messaged: string[] = messages.filter(
+        (messages: string): boolean => !messages.includes("?"),
+    );
+    messaged = messaged.map((messaged: string): string =>
+        messaged.at(-1) === "!" ? messaged.toUpperCase() : messaged,
+    );
+    return messaged;
 };
 
 /**
@@ -49,7 +70,10 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let worded: string[] = words.filter(
+        (words: string): boolean => words.length < 4,
+    );
+    return worded.length;
 }
 
 /**
@@ -58,7 +82,16 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if (!colors.length) {
+        return true;
+    }
+    let colored: boolean = colors.every(
+        (colors: string): boolean =>
+            colors.toLowerCase() === "red" ||
+            colors.toLowerCase() === "blue" ||
+            colors.toLowerCase() === "green",
+    );
+    return colored;
 }
 
 /**
@@ -69,7 +102,14 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (!addends.length) {
+        return "0=0";
+    }
+    let sum: number = 0;
+    sum += addends.reduce((total: number, num: number) => total + num, 0);
+    let addended: string = addends.join("+");
+
+    return sum.toString() + "=" + addended;
 }
 
 /**
@@ -82,5 +122,24 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let dummy: number[] = values.map((values: number): number => values);
+    let negative: number[] = [];
+    let sum_lis: number[] = values.map((values: number): number =>
+        negative.length === 0 ?
+            values >= 0 ?
+                values
+            :   (negative.push(values), 0)
+        :   0,
+    );
+    let sum: number = sum_lis.reduce(
+        (total: number, num: number) => total + num,
+        0,
+    );
+    let index: number = values.findIndex(
+        (values: number): boolean => values < 0,
+    );
+
+    index >= 0 ? dummy.splice(index + 1, 0, sum) : (dummy = [...dummy, sum]);
+
+    return dummy;
 }
